@@ -15,7 +15,7 @@ const Text = styled.Text`
 export default ({ movies, shows, keyword, onChange, onSubmit }) => (
     <Container>
         <Input
-            placeholder={"write a keyword"}
+            placeholder={"write a keyyyword"}
             value={keyword}
             onChange={onChange}
             onSubmit={onSubmit}
