@@ -13,11 +13,11 @@ const Image = styled.Image`
 `;
 
 const Poster = ({ url }) => (
-        <Image resizeMode="cover" source={{ uri: apiImage(url) }} />
-    );
+    <Image resizeMode="cover" source={{ uri: apiImage(url) }} />
+);
 
 Poster.propTypes = {
-    url: PropTypes.string.isRequired
+    url: PropTypes.string
 };
 
 export default Poster;

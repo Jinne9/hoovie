@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import MoviesContainer from "../screens/Movies/MoviesContainer";
 import TvContainer from "../screens/Tv/TvContainer";
 import Search from "../screens/Search";
-import Discovery from "../screens/Discovery";
+import Discovery from "../screens/Favs";
 import { Platform } from "react-native";
 
 const Tabs = createBottomTabNavigator();
@@ -28,23 +28,23 @@ export default ({ navigation, route }) => {
   return (
     <Tabs.Navigator
       screenOptions={({ route }) => ({
-          //하단 tap 바 아이콘 지정
+        //하단 tap 바 아이콘 지정
         tabBarIcon: ({ focused }) => {
-            // 플랫폼 별로 다르게 지정, ios / 그외
-            let iconName = Platform.OS ==="ios" ? "ios-" : "md-";
-            if(route.name === "Movies"){
-                iconName += "film";
-            } else if(route.name === "TV"){
-                iconName += "tv";
-            } else if(route.name === "Search"){
-                iconName += "search";
-            } else if(route.name === "Discovery"){
-                iconName += "heart";
-            }
+          // 플랫폼 별로 다르게 지정, ios / 그외
+          let iconName = Platform.OS === "ios" ? "ios-" : "md-";
+          if (route.name === "Movies") {
+            iconName += "film";
+          } else if (route.name === "TV") {
+            iconName += "tv";
+          } else if (route.name === "Search") {
+            iconName += "search";
+          } else if (route.name === "Discovery") {
+            iconName += "heart";
+          }
           // 아이콘 지정 : 포커스 되면 흰색, 아니면 녹색
           return (
             <Ionicons
-              name= {iconName}
+              name={iconName}
               color={focused ? "white" : "grey"}
               size={26}
             />
@@ -60,10 +60,10 @@ export default ({ navigation, route }) => {
         },
       }}
     >
-      <Tabs.Screen name="Search" component={Search} />
+      <Tabs.Screen name="Discovery" component={Discovery} />
       <Tabs.Screen name="Movies" component={MoviesContainer} />
       <Tabs.Screen name="TV" component={TvContainer} />
-      <Tabs.Screen name="Discovery" component={Discovery} />
+      <Tabs.Screen name="Search" component={Search} />
     </Tabs.Navigator>
   );
 };

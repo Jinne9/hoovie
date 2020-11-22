@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
 import Swiper from "react-native-web-swiper";
-import { Dimensions} from "react-native";
+import { Dimensions } from "react-native";
 import Slide from "../../components/Movies/Slide";
 import Vertical from "../../components/Vertical";
 import Horizontal from "../../components/Horizontal";
@@ -22,8 +22,8 @@ const SliderContainer = styled.View`
   margin-bottom:50px;
 `;
 
-export default ({ loading, nowPlaying, popular, upcoming }) => (
-  <ScrollContainer loading={loading}>
+export default ({ refreshFn, loading, nowPlaying, popular, upcoming }) => (
+  <ScrollContainer refreshFn={refreshFn} loading={loading}>
     <>
       {/* 슬라이더 영화 부분 */}
       <SliderContainer>

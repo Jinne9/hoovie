@@ -20,12 +20,13 @@ const SliderContainer = styled.View`
   margin-bottom:50px;
 `;
 
-export default ({ loading, popular, topRated, today }) => (
-    <ScrollContainer loading={loading}>
+export default ({ refreshFn, loading, popular, topRated, today }) => (
+    <ScrollContainer refreshFn={refreshFn} loading={loading}>
         <Container>
             <HorizontalSlider title="Popular Shows">
                 {popular.map(show =>
                     <Vertical
+                        isTv={true}
                         id={show.id}
                         key={show.id}
                         poster={show.poster_path}
@@ -36,6 +37,7 @@ export default ({ loading, popular, topRated, today }) => (
             <HorizontalSlider title="Top Rated">
                 {topRated.map(show =>
                     <Vertical
+                        isTv={true}
                         id={show.id}
                         key={show.id}
                         poster={show.poster_path}
@@ -46,32 +48,14 @@ export default ({ loading, popular, topRated, today }) => (
 
             <List title="Airing Today">
                 {today.map((show, index) =>
-                    index % 3 == 0 ?
-                        <SliderContainer>
-                            {/* constrolsEnabled 컨트롤 버튼 없애기, loop timeout 자동슬라이드 기능 */}
-                            < Swiper controlsEnabled={false} loop timeout={3} >
-                                {/* movie가 가지고 있는 id통해서 현재 상영 중인 영화목록 만들어 보여주기 */}
-                                {
-                                    topRated.map(shows => (
-                                        <Slide
-                                            key={shows.id}
-                                            id={shows.id}
-                                            title={shows.name}
-                                            poster={shows.poster_path }
-                                            overview={shows.overview}
-                                        />
-                                    ))
-                                }
-                            </Swiper >
-                        </SliderContainer >
-                        :
-                        <Horizontal
-                            key={show.id}
-                            id={show.id}
-                            title={show.name}
-                            poster={show.poster_path}
-                            overview={show.overview}
-                        />)}
+                    <Horizontal
+                        isTv={true}
+                        key={show.id}
+                        id={show.id}
+                        title={show.name}
+                        poster={show.poster_path}
+                        overview={show.overview}
+                    />)}
             </List>
         </Container>
     </ScrollContainer>

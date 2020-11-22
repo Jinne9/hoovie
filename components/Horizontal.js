@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Poster from './Poster';
 import { trimText, formatDate } from '../utils';
 import { TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 // import { TouchableOpacity } from 'react-native';
 
 const Container = styled.View`
@@ -36,15 +37,21 @@ const Overview = styled.Text`
     color:white;
 `;
 
-const Horizontal = ({
-    id,
-    title,
-    votes,
-    poster,
-    overview,
-    releaseDate
-}) => (
-        <TouchableOpacity>
+const Horizontal = ({ isTv = false, id, title, votes, poster, releaseDate, overview }) => {
+    // Naivigator 를 통해 정보를 전달
+    const navigation = useNavigation();
+    const goToDetail = () => {
+        navigation.navigate("Detail", {
+            isTv,
+            id,
+            title,
+            poster,
+            overview,
+            releaseDate
+        });
+    };
+    return (
+        <TouchableOpacity onPress={goToDetail}>
             <Container>
                 <Poster url={poster} />
                 <Data>
@@ -55,7 +62,8 @@ const Horizontal = ({
                 </Data>
             </Container>
         </TouchableOpacity>
-    );
+    )
+};
 
 Horizontal.propTypes = {
     id: PropTypes.number.isRequired,

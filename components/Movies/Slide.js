@@ -4,8 +4,9 @@ import PropTypes from "prop-types";
 import { apiImage } from '../../api';
 import Poster from '../Poster';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import Votes from '../../screens/Movies/Votes';
+import Votes from '../Votes';
 import { trimText } from '../../utils';
+import { useNavigation } from '@react-navigation/native';
 
 // 영화 슬라이드 컴포넌트
 
@@ -62,35 +63,45 @@ const ButtonText = styled.Text`
     color:white;
 `;
 
-const Slide = ({id, title, backgroundImage, votes, overview, poster}) => (
-    <Container>
-        <BG source={{uri:apiImage(backgroundImage)}} />
-        <Content>
-            <Poster url={poster} />
-            <Data>
-                <Title>{trimText(title,20)}</Title>
-                <VotesContainer>
-                    <Votes votes={votes} />
-                </VotesContainer>
-                <Overview>{trimText(overview, 110)}</Overview>
-                <TouchableOpacity>
-                    <Button>
-                        <ButtonText>View details</ButtonText>
-                    </Button>
-                </TouchableOpacity>
-            </Data>
-        </Content>
-    </Container>
-);
+const Slide = ({ id, title, backgroundImage, votes, overview, poster }) => {
+    // Navigator 로 보낸다
+    const navigation = useNavigation();
+    const goToDetail = () => {
+        navigation.navigate("Detail", {
+            id, title, backgroundImage, votes, overview, poster
+        });
+    };
+
+    return (
+        <Container>
+            <BG source={{ uri: apiImage(backgroundImage) }} />
+            <Content>
+                <Poster url={poster} />
+                <Data>
+                    <Title>{trimText(title, 20)}</Title>
+                    <VotesContainer>
+                        {votes ? <Votes votes={votes} /> : null}
+                    </VotesContainer>
+                    <Overview>{trimText(overview, 110)}</Overview>
+                    <TouchableOpacity onPress={goToDetail}>
+                        <Button>
+                            <ButtonText>View details</ButtonText>
+                        </Button>
+                    </TouchableOpacity>
+                </Data>
+            </Content>
+        </Container>
+    );
+};
 
 // Type 검사 및 지정
 Slide.propTypes = {
-    id : PropTypes.number.isRequired,
-    title : PropTypes.string.isRequired,
-    backgroundImage : PropTypes.string.isRequired,
-    votes : PropTypes.number.isRequired,
-    overview : PropTypes.string.isRequired,
-    poster : PropTypes.string.isRequired
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    votes: PropTypes.number.isRequired,
+    overview: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired
 }
 
 export default Slide;

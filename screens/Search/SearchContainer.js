@@ -16,6 +16,11 @@ export default () => {
     const onChange = (text) => setKeyword(text);
     // Input Text 제출 시 실행
     const search = async () => {
+        // 새로고침 시에는 keyword가 비어있다면 종료
+        if (keyword === "") {
+            return;
+        }
+
         // 검색 시간이 필요하기 때문에 setResults로 넘어가기 전에, 결과가 나올 때까지 대기
         const [movies, movieError] = await movieApi.search(keyword);
         const [shows, showerror] = await tvApi.search(keyword);

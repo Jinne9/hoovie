@@ -1,6 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import Detail from "../screens/Detail";
+import DetailContainer from "../screens/Detail/DetailContainer";
 import Tabs from "./Tabs";
 
 const Stack = createStackNavigator();
@@ -19,6 +19,6 @@ export default () => (
     }}
   >
     <Stack.Screen name="Tabs" component={Tabs}></Stack.Screen>
-    <Stack.Screen name="Detail" component={Detail}></Stack.Screen>
+    <Stack.Screen name="Detail" component={DetailContainer}></Stack.Screen>
   </Stack.Navigator>
 );

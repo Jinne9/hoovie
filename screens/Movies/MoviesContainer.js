@@ -4,8 +4,8 @@ import MoviesPrenster from "./MoviesPresenter";
 
 export default () => {
   // 1번만 Rendering 하기 위해 모든 State를 한 곳에 모은다.
-  const[movies, setMovies] = useState({
-    loading : true,
+  const [movies, setMovies] = useState({
+    loading: true,
     nowPlaying: [],
     popular: [],
     upcoming: [],
@@ -20,9 +20,9 @@ export default () => {
     const [upcoming, upcomingError] = await movieApi.upcoming();
     // 한 번만 Rendering 한다
     // console.log(`여기여기 ${popular}`);
-    
+
     setMovies({
-      loading : false,
+      loading: false,
       nowPlaying,
       popular,
       upcoming,
@@ -37,5 +37,5 @@ export default () => {
   }, []);
 
   // 모든 State 를 보낸다 {...State}
-  return <MoviesPrenster {...movies} />;
+  return <MoviesPrenster refreshFn={getData} {...movies} />;
 };
