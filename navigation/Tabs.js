@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import MoviesContainer from "../screens/Movies/MoviesContainer";
 import TvContainer from "../screens/Tv/TvContainer";
 import Search from "../screens/Search";
-import Discovery from "../screens/Favs";
+import Discovery from "../screens/Favs/FavsContrainer";
 import { Platform } from "react-native";
 
 const Tabs = createBottomTabNavigator();
@@ -60,10 +60,10 @@ export default ({ navigation, route }) => {
         },
       }}
     >
-      <Tabs.Screen name="Discovery" component={Discovery} />
       <Tabs.Screen name="Movies" component={MoviesContainer} />
       <Tabs.Screen name="TV" component={TvContainer} />
       <Tabs.Screen name="Search" component={Search} />
+      <Tabs.Screen name="Discovery" component={Discovery} />
     </Tabs.Navigator>
   );
 };
